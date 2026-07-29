@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionnaire de Tâches Pro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="box icon/fonts/basic/boxicons.min.css">
+</head>
+<body>
+
+  <!-- CONTENEUR DES TOAST NOTIFICATIONS -->
+  <div id="toast-container"></div>
+
+  <div class="app-container">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h3 class="sidebar-title">
+        <i class='bx bx-list-check'></i> TaskManager
+      </h3>
+
+      <!-- Stats Flash -->
+      <div class="donnees">
+        <div class="card-stat">
+          <h5 id="stat-completed">0</h5>
+          <p>Complétées</p>
+        </div>
+        <div class="card-stat">
+          <h5 id="stat-today">0</h5>
+          <p>Aujourd'hui</p>
+        </div>
+      </div>
+
+      <!-- Navigation / Filtres -->
+      <nav class="sidebar-menu">
+        <button class="menu-item active" data-filter="all">
+          <i class='bx bx-task'></i> Toutes les tâches
+        </button>
+        <button class="menu-item" data-filter="completed">
+          <i class='bx bx-check-circle'></i> Complétées
+        </button>
+        <button class="menu-item" data-filter="important">
+          <i class='bx bx-star'></i> Important
+        </button>
+        <button class="menu-item" data-filter="late">
+          <i class='bx bx-timer'></i> En retard
+        </button>
+      </nav>
+
+      <button class="btn-add" id="btn-open-modal">
+        <i class='bx bx-plus'></i> Ajouter une tâche
+      </button>
+    </aside>
+
+    <!-- ZONE PRINCIPALE -->
+    <main class="main-content">
+      <header class="main-header">
+        <h1 id="main-title">Toutes les tâches</h1>
+        
+        <div class="search-box">
+          <i class='bx bx-search'></i>
+          <input type="text" id="search-input" placeholder="Rechercher une tâche...">
+        </div>
+      </header>
+
+      <!-- BARRE DE PROGRESSION -->
+      <div class="progress-container">
+        <div class="progress-info">
+          <span>Progression globale</span>
+          <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- LISTE DES TÂCHES -->
+      <div class="tasks-list" id="tasks-container"></div>
+    </main>
+
+  </div>
+
+  <!-- MODAL D'AJOUT DE TÂCHE PRO -->
+  <div class="modal-overlay hidden" id="task-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Nouvelle Tâche</h2>
+        <button id="btn-close-modal"><i class='bx bx-x'></i></button>
+      </div>
+      <form id="task-form">
+        <div class="form-group">
+          <label for="task-title">Titre de la tâche</label>
+          <input type="text" id="task-title" required placeholder="ex: Préparer le TP de Réseau">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="task-priority">Priorité</label>
+            <select id="task-priority">
+              <option value="basse">Basse</option>
+              <option value="moyenne" selected>Moyenne</option>
+              <option value="haute">Haute</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="task-datetime">Date & Heure d'échéance</label>
+            <input type="datetime-local" id="task-datetime" required>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="btn-cancel">Annuler</button>
+          <button type="submit" class="btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
